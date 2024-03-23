@@ -158,3 +158,8 @@ volumes:
     driver: local
   logstashdata:
     driver: local
+
+networks:
+  default:
+    external:
+      name: realestate_default
