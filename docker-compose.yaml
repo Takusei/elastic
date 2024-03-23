@@ -127,14 +127,13 @@ services:
         condition: service_healthy
     # image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
     build:
-      dockerfile: ./logstash/logstash.dockerfile
+      dockerfile: ./logstash/Dockerfile
     labels:
       co.elastic.logs/module: logstash
     user: root
     volumes:
       - logstashdata:/usr/share/logstash/data
       - certs:/usr/share/logstash/certs
-      # - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
       - ./logstash/pipeline/:/usr/share/logstash/pipeline/
       - ./logstash/config/:/usr/share/logstash/config/
     environment:
@@ -143,11 +142,9 @@ services:
       - ELASTIC_USER=elastic
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - ELASTIC_HOSTS=https://es01:9200
-    # command: bash -c "logstash -f /etc/logstash/conf.d/logstash.conf "
     # command: logstash -f /usr/share/logstash/pipeline/logstash.conf
     ports:
       - "5044:5044/udp"
-    # mem_limit: ${MEM_LIMIT}
 
 volumes:
   certs:
@@ -162,4 +159,4 @@ volumes:
 networks:
   default:
     external:
-      name: realestate_default
+      name: realestate_default # Use the network created by the realEstate app
