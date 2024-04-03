@@ -46,7 +46,7 @@ GET suumo-xxxx.xx.xx/_search
 ```
 
 ## Note
-Make sure this docker compose is in the same network with realEstate
+Make sure this docker compose is in the same network with `realEstate` repo
 ```
 docker inspect es01 -f "{{json .NetworkSettings.Networks }}"
 ```
